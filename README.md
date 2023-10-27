@@ -1,16 +1,23 @@
 # deliveristo_test
 
-A new Flutter project.
+Dogs API implementation
 
-## Getting Started
+## How to run the app commands
+- flutter pub get
+- flutter run
+## App Views
+### Dashboard
+  - Dashboard show Random image of each breed
+  - You can click on any breed to view it's details
+### Image List By Breed
+- When you click on any breed image on Dashboard screen you will move to show breed image list screen
+ - This screen shows you list of images of breed you selected.
+ - Its will show sub-breed image with it's name or
+ - if there is no sub-breed then it will show list of images of breed
+ - if your click on sub-breed image it will move to sub-breed image list page
+### Image List By Sub Breed
+- Sub-Breed image list page list of images of selected sub-breed
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
