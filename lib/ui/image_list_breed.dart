@@ -75,6 +75,8 @@ class _ImageListByBreedState extends State<ImageListByBreed> {
                 url: state.imageListByBreed.images[index],
               ),
             );
+          } else if (state is ServerErrorImageListByBreed) {
+            return Center(child: Text(state.message));
           }
           return const SizedBox();
         },

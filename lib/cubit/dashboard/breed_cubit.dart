@@ -24,19 +24,25 @@ class BreedCubit extends Cubit<BreedState> {
   }
 
   Future<BreedImage> getBreedRandomImage(String breedName) async {
-    try {
-      final response = await repository.getRandomImageOfBreed(breedName: breedName);
-      final breedsData = BreedImage.fromJson(jsonDecode(response.body));
-      return breedsData;
-    } on Exception {
-      return BreedImage(image: '', status: 'failed');
+    final data = await repository.getRandomImageOfBreed(breedName: breedName);
+    final response = data.fold((l) => null, (r) => r);
+    if (response == null) {
+      return BreedImage(image: '', status: 'fail');
     }
+    final breedsData = BreedImage.fromJson(jsonDecode(response.body));
+    return breedsData;
   }
 
   Future<void> _getBreedsImpl() async {
-    final response = await repository.getAllBreeds();
-    final breedsData = Breed.fromJson(jsonDecode(response.body));
     List<BreedDetail> breeds = [];
+    final data = await repository.getAllBreeds();
+    final response = data.fold((l) => null, (r) => r);
+    if (response == null) {
+      emit(NoBreeds());
+      return;
+    }
+    final breedsData = Breed.fromJson(jsonDecode(response.body));
+
     breedsData.breeds.forEach((key, value) {
       List<SubBreed> subbreed = [];
 

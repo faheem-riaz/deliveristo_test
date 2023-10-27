@@ -15,3 +15,8 @@ class BreedDataWithNoSubBreeds extends ImageListByBreedState {
   final ImageListByBreedModel imageListByBreed;
   BreedDataWithNoSubBreeds({required this.imageListByBreed});
 }
+
+class ServerErrorImageListByBreed extends ImageListByBreedState {
+  final String message;
+  ServerErrorImageListByBreed({required this.message});
+}

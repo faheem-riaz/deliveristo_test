@@ -12,9 +12,12 @@ class ImageListSubBreedCubit extends Cubit<ImageListSubBreedState> {
 
   Future<void> getSubBreedImage({required String breed, required String subBreed}) async {
     emit(ImageListSubBreedLoading());
-    final response = await _dogRepository.getImageListOfSubBreed(breedName: breed, subBreed: subBreed);
-    final subBreedData = ImageListByBreedModel.fromJson(jsonDecode(response.body));
-
-    emit(SubBreedData(subBreedData: subBreedData));
+    final data = await _dogRepository.getImageListOfSubBreed(breedName: breed, subBreed: subBreed);
+    data.fold((serverError) {
+      emit(ServerErrorImageListBySubBreed(message: serverError.message));
+    }, (response) {
+      final subBreedData = ImageListByBreedModel.fromJson(jsonDecode(response.body));
+      emit(SubBreedData(subBreedData: subBreedData));
+    });
   }
 }

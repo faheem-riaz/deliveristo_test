@@ -41,6 +41,8 @@ class _ImageListSubBreedState extends State<ImageListSubBreed> {
                 return AppNetworkImage(url: state.subBreedData.images[index]);
               },
             );
+          } else if (state is ServerErrorImageListBySubBreed) {
+            return Center(child: Text(state.message));
           }
 
           return const SizedBox();

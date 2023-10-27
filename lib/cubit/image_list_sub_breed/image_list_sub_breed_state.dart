@@ -10,3 +10,8 @@ class SubBreedData extends ImageListSubBreedState {
   final ImageListByBreedModel subBreedData;
   SubBreedData({required this.subBreedData});
 }
+
+class ServerErrorImageListBySubBreed extends ImageListSubBreedState {
+  final String message;
+  ServerErrorImageListBySubBreed({required this.message});
+}

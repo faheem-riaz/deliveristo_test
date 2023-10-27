@@ -7,43 +7,47 @@ void main() {
       // Arrange
       final dogRepository = DogRepository();
       // Act
-      final response = await dogRepository.getAllBreeds();
+      final data = await dogRepository.getAllBreeds();
       //Assert
-      expect(response.statusCode, 200);
+      final response = data.fold((l) => null, (res) => res);
+      expect(response?.statusCode, 200);
     });
 
     test('getRandomImageOfBreed should return a successful response', () async {
       final dogRepository = DogRepository();
       const breedName = 'husky';
-      final response = await dogRepository.getRandomImageOfBreed(breedName: breedName);
+      final data = await dogRepository.getRandomImageOfBreed(breedName: breedName);
 
-      expect(response.statusCode, 200);
+      final response = data.fold((l) => null, (res) => res);
+      expect(response?.statusCode, 200);
     });
 
     test('getRandomImageOfSubBreed should return a successful response', () async {
       final dogRepository = DogRepository();
       const breedName = 'hound';
       const subBreed = 'afghan';
-      final response = await dogRepository.getRandomImageOfSubBreed(breedName: breedName, subBreed: subBreed);
+      final data = await dogRepository.getRandomImageOfSubBreed(breedName: breedName, subBreed: subBreed);
 
-      expect(response.statusCode, 200);
+      final response = data.fold((l) => null, (res) => res);
+      expect(response?.statusCode, 200);
     });
 
     test('getImageListOfBreed should return a successful response', () async {
       final dogRepository = DogRepository();
       const breedName = 'husky';
-      final response = await dogRepository.getImageListOfBreed(breedName: breedName);
-
-      expect(response.statusCode, 200);
+      final data = await dogRepository.getImageListOfBreed(breedName: breedName);
+      final response = data.fold((l) => null, (res) => res);
+      expect(response?.statusCode, 200);
     });
 
     test('getImageListOfSubBreed should return a successful response', () async {
       final dogRepository = DogRepository();
       const breedName = 'hound';
       const subBreed = 'afghan';
-      final response = await dogRepository.getImageListOfSubBreed(breedName: breedName, subBreed: subBreed);
+      final data = await dogRepository.getImageListOfSubBreed(breedName: breedName, subBreed: subBreed);
 
-      expect(response.statusCode, 200);
+      final response = data.fold((l) => null, (res) => res);
+      expect(response?.statusCode, 200);
     });
   });
 }

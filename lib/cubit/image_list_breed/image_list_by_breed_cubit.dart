@@ -25,22 +25,29 @@ class ImageListByBreedCubit extends Cubit<ImageListByBreedState> {
       await Future.forEach(
         breedData.subbreed,
         (subBreed) async {
-          final response = await _repository.getRandomImageOfSubBreed(
+          final data = await _repository.getRandomImageOfSubBreed(
             breedName: breedName,
             subBreed: subBreed.name,
           );
-          final imageData = BreedImage.fromJson(jsonDecode(response.body));
-          imageData.breedName = subBreed.name;
-          subBreedImages.add(imageData);
+          data.fold((serverError) {
+            emit(ServerErrorImageListByBreed(message: serverError.message));
+          }, (response) {
+            final imageData = BreedImage.fromJson(jsonDecode(response.body));
+            imageData.breedName = subBreed.name;
+            subBreedImages.add(imageData);
+            imageListByBreed = ImageListByBreed(images: subBreedImages, breedName: breedName);
+            emit(BreedData(imageListByBreed: imageListByBreed));
+          });
         },
       );
-
-      imageListByBreed = ImageListByBreed(images: subBreedImages, breedName: breedName);
-      emit(BreedData(imageListByBreed: imageListByBreed));
     } else {
-      final response = await _repository.getImageListOfBreed(breedName: breedName);
-      final imageData = ImageListByBreedModel.fromJson(jsonDecode(response.body));
-      emit(BreedDataWithNoSubBreeds(imageListByBreed: imageData));
+      final data = await _repository.getImageListOfBreed(breedName: breedName);
+      data.fold((serverError) {
+        emit(ServerErrorImageListByBreed(message: serverError.message));
+      }, (response) {
+        final imageData = ImageListByBreedModel.fromJson(jsonDecode(response.body));
+        emit(BreedDataWithNoSubBreeds(imageListByBreed: imageData));
+      });
     }
   }
 }

@@ -23,6 +23,8 @@ class Dashboard extends StatelessWidget {
               separatorBuilder: (context, index) => const SizedBox(height: 10),
               itemCount: state.breeds.length,
             );
+          } else if (state is NetwrokError) {
+            return Center(child: Text(state.message));
           }
           return const SizedBox();
         },
