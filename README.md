@@ -18,6 +18,9 @@ Dogs API implementation
 ### Image List By Sub Breed
 - Sub-Breed image list page list of images of selected sub-breed
 
+## How to run Flutter test commands
+- flutter test
+
 
 
 
